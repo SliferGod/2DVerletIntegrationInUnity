@@ -13,5 +13,7 @@ public class VerletObject {
         lastPosition = position;
         //Perform Verlet Integration
         position = position + velocity + acceleration * dt * dt;
+        //Reset acceleration
+        acceleration = new Vec2();
     }
 }
