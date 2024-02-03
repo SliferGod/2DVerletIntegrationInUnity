@@ -13,4 +13,16 @@ public class Vec2 {
         this.x = x;
         this.y = y;
     }
+
+    public void setPosition(float x, float y)
+    {
+        this.x = x;
+        this.y = y;
+    }
+
+    public void setPosition(Vec2 v)
+    {
+        x = v.x;
+        y = v.y;
+    }
 }
