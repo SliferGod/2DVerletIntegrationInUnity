@@ -14,18 +14,6 @@ public readonly struct Vec2 {
         this.y = y;
     }
 
-    public void setPosition(float x, float y)
-    {
-        this.x = x;
-        this.y = y;
-    }
-
-    public void setPosition(Vec2 v)
-    {
-        x = v.x;
-        y = v.y;
-    }
-
     public static Vec2 operator +(Vec2 a) => a;
     public static Vec2 operator -(Vec2 a) => new Vec2(-a.x, -a.y);
 
