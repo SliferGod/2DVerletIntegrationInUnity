@@ -47,6 +47,11 @@ public readonly struct Vec2 {
         return new Vec2(a.x / b.x, a.y / b.y);
     }
 
+    public static Vec2 operator ==(Vec2 a, Vec2 b) {
+        if(a.x == b.x && a.y == b.y) return true;
+        else return false;
+    }
+
     public static float distance(Vec2 a, Vec2 b) {
         return Math.sqrt(Math.pow(a.x - b.x, 2) + Math.pow(a.y - b.y, 2));
     }
