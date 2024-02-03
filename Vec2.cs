@@ -1,6 +1,6 @@
 using System;
 
-public class Vec2 {
+public readonly struct Vec2 {
     public float x;
     public float y;
 
@@ -24,5 +24,30 @@ public class Vec2 {
     {
         x = v.x;
         y = v.y;
+    }
+
+    public static Vec2 operator +(Vec2 a) => a;
+    public static Vec2 operator -(Vec2 a) => new Vec2(-a.x, -a.y);
+
+    public static Vec2 operator +(Vec2 a, Vec2 b)
+        => new Vec2(a.x + b.x, a.y + b.y);
+
+    public static Vec2 operator -(Vec2 a, Vec2 b)
+        => a + (-b);
+
+    public static Vec2 operator *(Vec2 a, Vec2 b)
+        => new Vec2(a.x * b.x, a.y * b.y);
+
+    public static Vec2 operator /(Vec2 a, Vec2 b)
+    {
+        if (b.x == 0 || b.y == 0)
+        {
+            throw new DivideByZeroException();
+        }
+        return new Vec2(a.x / b.x, a.y / b.y);
+    }
+
+    public static float distance(Vec2 a, Vec2 b) {
+        return Math.sqrt(Math.pow(a.x - b.x, 2) + Math.pow(a.y - b.y, 2));
     }
 }
