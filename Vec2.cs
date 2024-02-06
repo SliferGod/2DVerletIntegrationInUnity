@@ -1,13 +1,9 @@
 using System;
 
 public readonly struct Vec2 {
-    public float x;
-    public float y;
+    public readonly float x;
+    public readonly float y;
 
-    public Vec2() {
-        x = 0;
-        y = 0;
-    }
 
     public Vec2(float x, float y) {
         this.x = x;
@@ -35,9 +31,14 @@ public readonly struct Vec2 {
         return new Vec2(a.x / b.x, a.y / b.y);
     }
 
-    public static Vec2 operator ==(Vec2 a, Vec2 b) {
+    public static bool operator ==(Vec2 a, Vec2 b) {
         if(a.x == b.x && a.y == b.y) return true;
         else return false;
+    }
+    public static bool operator !=(Vec2 a, Vec2 b)
+    {
+        if (a.x == b.x && a.y == b.y) return false;
+        else return true;
     }
 
     public static Vec2 operator +(Vec2 a, float b)
@@ -58,15 +59,6 @@ public readonly struct Vec2 {
     public static Vec2 operator *(float a, Vec2 b)
         => new Vec2(a * b.x, a * b.y);
 
-    public static Vec2 operator /(Vec2 a, Vec2 b)
-    {
-        if (b.x == 0 || b.y == 0)
-        {
-            throw new DivideByZeroException();
-        }
-        return new Vec2(a.x / b.x, a.y / b.y);
-    }
-
     public static Vec2 operator /(float a, Vec2 b)
     {
         if (b.x == 0 || b.y == 0)
@@ -85,12 +77,7 @@ public readonly struct Vec2 {
         return new Vec2(a.x / b, a.y / b);
     }
 
-    public static Vec2 operator ==(Vec2 a, Vec2 b) {
-        if(a.x == b.x && a.y == b.y) return true;
-        else return false;
-    }
-
     public static float distance(Vec2 a, Vec2 b) {
-        return Math.sqrt(Math.pow(a.x - b.x, 2) + Math.pow(a.y - b.y, 2));
+        return (float)(Math.Sqrt(Math.Pow(a.x - b.x, 2) + Math.Pow(a.y - b.y, 2)));
     }
 }

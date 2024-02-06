@@ -5,6 +5,20 @@ public class VerletObject {
     public Vec2 lastPosition;
     public Vec2 acceleration;
 
+    public VerletObject()
+    {
+        position = new Vec2(0, 0);
+        lastPosition = new Vec2(0, 0);
+        acceleration = new Vec2(0, 0);
+    }
+
+    public VerletObject(float x, float y)
+    {
+        position = new Vec2(x, y);
+        lastPosition = new Vec2(x, y);
+        acceleration = new Vec2(0, 0);
+    }
+
     public void UpdatePosition(float dt)
     {
         //Calculate the velocity using the Verlet method
