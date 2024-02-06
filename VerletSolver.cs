@@ -3,11 +3,14 @@ using UnityEngine;
 
 public class VerletSolver : MonoBehaviour
 {
+    [Header("Variables that Control the \nMain Settings of the Simulation")]
     public int numOfSubSteps;
     public float updateIntervalTime;
     public float leftOverTime;
-    public VerletObject[] objects;
     public float timeScale = 1;
+    public List<VerletObject> objects = new List<VerletObject>();
+    public List<VerletConstraint> constraints = new List<VerletConstraint>();
+    
 
     public GameObject test;
     public VerletObject v;
@@ -29,16 +32,15 @@ public class VerletSolver : MonoBehaviour
         {
             for (int b = 0; b < numOfSubSteps; b++)
             {
+                //Update the positions based on Verlet Integration
                 for (int c = 0; c < objects.Length; c++)
                 {
-                    objects[c].acceleration += new Vec2(0, -10);
                     objects[c].UpdatePosition(updateIntervalTime / numOfSubSteps);
+                }
 
-                    float dist = Vec2.distance(objects[c].position, new Vec2(0, 0));
-                    if (dist > 3f)
-                    {
-                        objects[c].position = objects[c].lastPosition;
-                    }
+                //Run Constraints
+                for (int c = 0; c < constraints.Length; c++) {
+                    constraints[c].Constrain(objects, updateIntervalTime / numOfSubSteps);
                 }
             }
         }
