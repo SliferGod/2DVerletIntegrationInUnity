@@ -6,15 +6,17 @@ public class PinnedLeash : VerletConstraint {
   public VerletObject obj;
   public float leashDistance;
 
-  public PinnedLeash(VerletObject obj) {
+  public PinnedLeash(&Vec2 pinPoint, VerletObject obj, float leashDistance) {
+    this.pinPoint = pinPoint;
     this.obj = obj;
+    this.leashDistance = leashDistance;
   }
   
   public void Constrain(List<VerletObject> objects, float dt) {
     float dist = Vec2.distance(pinPoint, obj.position);
 
     if(dist > leashDistance) {
-      obj.position = new Vec2(leashDistance * (obj.position.x / dist), leashDistance * (obj.position.y / dist));
+      obj.position = (leashDistance * ((obj.position - pinPoint)) / dist) + pinPoint;
     }
   }
 }
