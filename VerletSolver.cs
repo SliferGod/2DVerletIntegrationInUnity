@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class VerletSolver : MonoBehaviour
@@ -10,6 +11,7 @@ public class VerletSolver : MonoBehaviour
     public float timeScale = 1;
     public List<VerletObject> objects = new List<VerletObject>();
     public List<VerletConstraint> constraints = new List<VerletConstraint>();
+    public List<VerletForceController> forces = new List<VerletForceController>();
     
 
     public GameObject test;
@@ -18,7 +20,7 @@ public class VerletSolver : MonoBehaviour
     public void Start()
     {
         v = new VerletObject(test.transform.position.x, test.transform.position.y);
-        objects = new VerletObject[1];
+        objects.Add(v);
         objects[0] = v;
     }
 
@@ -32,15 +34,21 @@ public class VerletSolver : MonoBehaviour
         {
             for (int b = 0; b < numOfSubSteps; b++)
             {
-                //Update the positions based on Verlet Integration
-                for (int c = 0; c < objects.Length; c++)
-                {
-                    objects[c].UpdatePosition(updateIntervalTime / numOfSubSteps);
+                //Run Constraints
+                for (int c = 0; c < constraints.Count; c++) {
+                    constraints[c].Constrain(objects, updateIntervalTime / numOfSubSteps);
                 }
 
-                //Run Constraints
-                for (int c = 0; c < constraints.Length; c++) {
-                    constraints[c].Constrain(objects, updateIntervalTime / numOfSubSteps);
+                //Apply Forces
+                for (int c = 0; c < forces.Count; c++)
+                {
+                    forces[c].ApplyForces(updateIntervalTime / numOfSubSteps);
+                }
+
+                //Update the positions based on Verlet Integration
+                for (int c = 0; c < objects.Count; c++)
+                {
+                    objects[c].UpdatePosition(updateIntervalTime / numOfSubSteps);
                 }
             }
         }

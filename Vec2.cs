@@ -10,6 +10,17 @@ public readonly struct Vec2 {
         this.y = y;
     }
 
+    public override bool Equals(object obj)
+    {
+        if (this.GetHashCode() == obj.GetHashCode()) return true;
+        else return false;
+    }
+
+    public override int GetHashCode()
+    {
+        return this.GetHashCode();
+    }
+
     public static Vec2 operator +(Vec2 a) => a;
     public static Vec2 operator -(Vec2 a) => new Vec2(-a.x, -a.y);
 
