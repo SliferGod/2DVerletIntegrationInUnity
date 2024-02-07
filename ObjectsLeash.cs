@@ -6,8 +6,10 @@ public class ObjectsLeash : VerletConstraint {
   public VerletObject objTwo;
   public float leashDistance;
 
-  public ObjectsLeash(VerletObject obj) {
-    this.obj = obj;
+  public ObjectsLeash(VerletObject objOne, VerletObject objTwo, float leashDistance) {
+    this.objOne = objOne;
+    this.objTwo = objTwo;
+    this.leashDistance = leashDistance;
   }
   
   public void Constrain(List<VerletObject> objects, float dt) {
