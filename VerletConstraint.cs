@@ -1,10 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class VerletConstraint
+public abstract class VerletConstraint
 {
-    public void Constrain(List<VerletObject> objects, float dt)
-    {
-
-    }
+    public abstract void Constrain(List<VerletObject> objects, float dt);
 }

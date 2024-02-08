@@ -2,10 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class VerletForceController : MonoBehaviour
+public abstract class VerletForceController : MonoBehaviour
 {
-    public void ApplyForces(float dt)
-    {
-
-    }
+    public abstract void ApplyForces(float dt);
 }

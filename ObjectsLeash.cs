@@ -12,12 +12,12 @@ public class ObjectsLeash : VerletConstraint {
     this.leashDistance = leashDistance;
   }
   
-  public void Constrain(List<VerletObject> objects, float dt) {
+  public override void Constrain(List<VerletObject> objects, float dt) {
     float distBetween = Vec2.distance(objOne.position, objTwo.position);
 
     if(distBetween > leashDistance) {
       Vec2 middlePoint = new Vec2((objOne.position.x + objTwo.position.x) / 2, (objOne.position.y + objTwo.position.y) / 2);
-      dist = distBetween / 2f;
+      float dist = distBetween / 2f;
       objOne.position = (.5f * leashDistance * ((objOne.position - middlePoint)) / dist) + middlePoint;
       objTwo.position = (.5f * leashDistance * ((objTwo.position - middlePoint)) / dist) + middlePoint;
     }
