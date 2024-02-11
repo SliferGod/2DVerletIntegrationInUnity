@@ -4,12 +4,14 @@ public class VerletObject {
     public Vec2 position;
     public Vec2 lastPosition;
     public Vec2 acceleration;
+    public float radius;
 
     public VerletObject()
     {
         position = new Vec2(0, 0);
         lastPosition = new Vec2(0, 0);
         acceleration = new Vec2(0, 0);
+        radius = 0;
     }
 
     public VerletObject(float x, float y)
@@ -17,6 +19,15 @@ public class VerletObject {
         position = new Vec2(x, y);
         lastPosition = new Vec2(x, y);
         acceleration = new Vec2(0, 0);
+        radius = 0;
+    }
+
+    public VerletObject(float x, float y, float radius)
+    {
+        position = new Vec2(x, y);
+        lastPosition = new Vec2(x, y);
+        acceleration = new Vec2(0, 0);
+        this.radius = radius;
     }
 
     public void UpdatePosition(float dt)

@@ -17,11 +17,31 @@ public class VerletSolver : MonoBehaviour
     public GameObject test;
     public VerletObject v;
 
+    public GameObject testTwo;
+    public VerletObject v2;
+
     public void Start()
     {
-        v = new VerletObject(test.transform.position.x, test.transform.position.y);
+        v = new VerletObject(test.transform.position.x, test.transform.position.y, 1);
         objects.Add(v);
-        objects[0] = v;
+
+        PinnedLeash c = new PinnedLeash(new Vec2(-2, 0), v, 3);
+        constraints.Add(c);
+
+        GravityOnlyForceController f = new GravityOnlyForceController(v, 1000);
+        forces.Add(f);
+
+
+
+        v2 = new VerletObject(testTwo.transform.position.x, testTwo.transform.position.y, 1);
+        objects.Add(v2);
+
+        c = new PinnedLeash(new Vec2(-2, 0), v2, 3);
+        constraints.Add(c);
+
+        f = new GravityOnlyForceController(v2, 1000);
+        forces.Add(f);
+
     }
 
 
@@ -57,6 +77,7 @@ public class VerletSolver : MonoBehaviour
 
         //Testing
         test.transform.position = new Vector3(v.position.x, v.position.y);
+        testTwo.transform.position = new Vector3(v2.position.x, v2.position.y);
     }
 
 }
